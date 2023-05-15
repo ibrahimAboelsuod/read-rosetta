@@ -1,0 +1,10 @@
+.hero-section {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(/images/rosetta_stone_being_discovered_2.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
