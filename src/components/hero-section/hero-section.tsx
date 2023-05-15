@@ -14,8 +14,8 @@ export default function HeroSection({ className }: HeroSectionProps) {
         className
       )}
     >
-      <h1>Welcome to Read Rosetta</h1>
-      <p>Decipher the Past, Understand the Future.</p>
+      <h1 className='text-center'>Welcome to Read Rosetta</h1>
+      <h6 className='text-center'>Decipher the Past, Understand the Future.</h6>
     </section>
   );
 }

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps) {
   return (
-    <nav className={cn('navbar navbar-expand-lg', className)}>
+    <nav className={cn('navbar navbar-expand-lg bg-light p-0 d-flex align-items-center', className)}>
       <a className='navbar-brand ps-2' href='#'>
         Read Rosetta
       </a>

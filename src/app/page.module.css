@@ -1,14 +1,18 @@
 .main {
+  height: 100vh;
+  overflow-y: auto;
   display: grid;
-  grid-template-areas: 'header' 'hero-section' 'footer';
-  grid-template-rows: 80px 80vh 100px;
+  grid-template-areas: 'header' 'hero-section' 'content-container';
+  grid-template-rows: 60px 75vh auto;
 }
 .header {
-  grid-area: 'header';
+  grid-area: header;
+  position: sticky;
+  top: 0;
 }
 .hero-section {
-  grid-area: 'hero-section';
+  grid-area: hero-section;
 }
-.footer {
-  grid-area: 'footer';
+.content-container {
+  grid-area: content-container;
 }
