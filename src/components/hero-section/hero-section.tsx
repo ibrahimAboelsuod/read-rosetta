@@ -16,6 +16,9 @@ export default function HeroSection({ className }: HeroSectionProps) {
     >
       <h1 className='text-center'>Welcome to Read Rosetta</h1>
       <h6 className='text-center'>Decipher the Past, Understand the Future.</h6>
+      <button type='button' className='btn btn-warning text-white mt-5'>
+        Start Learning now
+      </button>
     </section>
   );
 }
