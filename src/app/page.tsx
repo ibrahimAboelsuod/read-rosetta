@@ -1,25 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 import cn from 'classnames';
 
-import Header from '@/components/header/header';
 import HeroSection from '@/components/hero-section/hero-section';
 
 import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className={cn('bg-light', styles.main)}>
-      <Header className={styles.header} />
-
+    <>
       <HeroSection className={styles['hero-section']} />
 
-      <section
-        className={cn('container bg-white p-4', styles['content-container'])}
-      >
+      <section className={cn('container bg-white p-4', 'content-container')}>
         <h2 className='text-dark text-center'>The Rosetta Stone</h2>
         <div className='row'>
           <div className='col-md-4'>
             <img
               src='https://arce.org/wp-content/uploads/files-imported/2019-02/rosettastone.jpg'
+              alt='The Rosetta Stone hero image'
               className='w-100'
             />
           </div>
@@ -72,6 +69,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

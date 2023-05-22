@@ -1,6 +1,11 @@
-import './globals.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Inter } from 'next/font/google';
+
+import cn from 'classnames';
+import 'bootstrap/dist/css/bootstrap.css';
+
+import Header from '@/components/header/header';
+
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className={cn('bg-light', 'main')}>
+          <Header className='header' />
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
