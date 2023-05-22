@@ -1,6 +1,11 @@
 import { usePathname } from 'next/navigation';
 
 import cn from 'classnames';
+import { getAuth, signOut } from 'firebase/auth';
+import { useQuery } from 'react-query';
+
+import useFirebaseAuth from '@/firebase/firebase-auth.hook';
+import { firebaseApp } from '@/firebase/init-firebase';
 
 import styles from './header.module.css';
 
@@ -10,6 +15,15 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps) {
   const pathname = usePathname();
+  const { authUser } = useFirebaseAuth();
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ['signupData'],
+    enabled: false,
+    queryFn: async () => {
+      await signOut(getAuth(firebaseApp));
+    },
+  });
 
   return (
     <nav
@@ -56,28 +70,47 @@ export default function Header({ className }: HeaderProps) {
               Courses
             </a>
           </li> */}
-          <li className='nav-item'>
-            <a
-              className={cn(
-                { active: pathname === '/auth/signup' },
-                'nav-link text-white'
-              )}
-              href='/auth/signup'
-            >
-              Signup
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a
-              className={cn(
-                { active: pathname === '/auth/login' },
-                'nav-link text-white'
-              )}
-              href='/auth/login'
-            >
-              Login
-            </a>
-          </li>
+          {!authUser ? (
+            <>
+              <li className='nav-item'>
+                <a
+                  className={cn(
+                    { active: pathname === '/auth/signup' },
+                    'nav-link text-white'
+                  )}
+                  href='/auth/signup'
+                >
+                  Signup
+                </a>
+              </li>
+              <li className='nav-item'>
+                <a
+                  className={cn(
+                    { active: pathname === '/auth/login' },
+                    'nav-link text-white'
+                  )}
+                  href='/auth/login'
+                >
+                  Login
+                </a>
+              </li>
+            </>
+          ) : (
+            <li className='nav-item'>
+              <a
+                className={cn('nav-link text-danger')}
+                href='#'
+                onClick={() => refetch()}
+                role='button'
+                aria-disabled={isLoading}
+              >
+                {isLoading && (
+                  <span className='spinner-border spinner-border-sm me-2'></span>
+                )}
+                Logout
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

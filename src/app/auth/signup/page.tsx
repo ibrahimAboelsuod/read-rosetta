@@ -4,11 +4,14 @@ import { useRouter } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+} from 'firebase/auth';
 import { collection, doc, setDoc } from 'firebase/firestore';
 
 import { User } from '@/models';
-import { firestoreDB } from '@/firebase/init-firebase';
+import { firebaseApp, firestoreDB } from '@/firebase/init-firebase';
 
 export const metadata: Metadata = {
   title: 'Read Rosetta | Signup',
@@ -30,10 +33,11 @@ export default function Signup() {
     queryFn: async () => {
       const userData = getValues();
       try {
+        const auth = getAuth(firebaseApp);
         const { user } = await createUserWithEmailAndPassword(
-          getAuth(),
-          getValues('email'),
-          getValues('password') || ''
+          auth,
+          userData.email,
+          userData.password || ''
         );
 
         await setDoc(doc(collection(firestoreDB, 'USERS'), user.uid), {
@@ -45,7 +49,7 @@ export default function Signup() {
 
         router.push('/');
       } catch (error) {
-        console.error(error);
+        alert(error);
       }
     },
   });
