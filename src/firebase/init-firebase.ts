@@ -1,4 +1,5 @@
-import Firebase from 'firebase/app';
+import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
+import { Firestore, getFirestore } from 'firebase/firestore';
 
 const FirebaseCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
@@ -6,9 +7,13 @@ const FirebaseCredentials = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 };
 
-export default function initFirebase() {
+export var firebaseApp: FirebaseApp;
+export var firestoreDB: Firestore;
+
+export function initFirebase() {
   // if a Firebase instance doesn't exist, create one
-  if (!Firebase.getApps().length) {
-    Firebase.initializeApp(FirebaseCredentials);
+  if (!getApps()?.length) {
+    firebaseApp = initializeApp(FirebaseCredentials);
+    firestoreDB = getFirestore(firebaseApp);
   }
 }

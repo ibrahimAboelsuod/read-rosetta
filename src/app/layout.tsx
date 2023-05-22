@@ -4,12 +4,15 @@ import { Inter } from 'next/font/google';
 import cn from 'classnames';
 import 'bootstrap/dist/css/bootstrap.css';
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { initFirebase } from '../firebase/init-firebase';
 import Header from '@/components/header/header';
 
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
+initFirebase();
 
 export const metadata = {
   title: 'Read Rosetta',
@@ -21,6 +24,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient();
+
   return (
     <html lang='en'>
       <head>
@@ -28,8 +33,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <main className={cn('bg-light', 'main')}>
-          <Header className='header' />
-          {children}
+          <QueryClientProvider client={queryClient}>
+            <Header className='header' />
+            {children}
+          </QueryClientProvider>
         </main>
       </body>
     </html>
