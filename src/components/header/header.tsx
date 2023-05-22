@@ -19,7 +19,7 @@ export default function Header({ className }: HeaderProps) {
         className
       )}
     >
-      <a className='navbar-brand text-white ps-2' href='#'>
+      <a className='navbar-brand text-white ps-2' href='/'>
         <h4 className='mb-0'>Read Rosetta</h4>
       </a>
       <button
@@ -41,12 +41,12 @@ export default function Header({ className }: HeaderProps) {
                 { active: pathname === '/' },
                 'nav-link text-white'
               )}
-              href='./'
+              href='/'
             >
               Home
             </a>
           </li>
-          <li className='nav-item'>
+          {/* <li className='nav-item'>
             <a
               className={cn(
                 { active: pathname === '/courses' },
@@ -56,7 +56,7 @@ export default function Header({ className }: HeaderProps) {
             >
               Courses
             </a>
-          </li>
+          </li> */}
           <li className='nav-item'>
             <a
               className={cn(
