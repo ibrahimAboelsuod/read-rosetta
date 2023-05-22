@@ -60,12 +60,23 @@ export default function Header({ className }: HeaderProps) {
           <li className='nav-item'>
             <a
               className={cn(
-                { active: pathname === '/login' },
+                { active: pathname === '/auth/signup' },
                 'nav-link text-white'
               )}
-              href='/login'
+              href='/auth/signup'
             >
-              Login/Signup
+              Signup
+            </a>
+          </li>
+          <li className='nav-item'>
+            <a
+              className={cn(
+                { active: pathname === '/auth/login' },
+                'nav-link text-white'
+              )}
+              href='/auth/login'
+            >
+              Login
             </a>
           </li>
         </ul>
