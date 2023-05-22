@@ -1,7 +1,9 @@
+'use client';
 import { Inter } from 'next/font/google';
 
 import cn from 'classnames';
 import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Header from '@/components/header/header';
 
@@ -21,6 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
+      <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+      </head>
       <body className={inter.className}>
         <main className={cn('bg-light', 'main')}>
           <Header className='header' />
