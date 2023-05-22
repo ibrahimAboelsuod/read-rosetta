@@ -143,7 +143,7 @@ export default function Signup() {
           </div>
           <div className='card-footer text-center'>
             <div className='small'>
-              Already have an account? <a href='#'>Login</a>
+              Already have an account? <a href='login'>Login</a>
             </div>
           </div>
         </div>
