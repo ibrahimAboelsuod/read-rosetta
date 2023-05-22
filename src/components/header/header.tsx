@@ -1,3 +1,6 @@
+'use client';
+import { usePathname } from 'next/navigation';
+
 import cn from 'classnames';
 
 import styles from './header.module.css';
@@ -7,6 +10,8 @@ interface HeaderProps {
 }
 
 export default function Header({ className }: HeaderProps) {
+  const pathname = usePathname();
+
   return (
     <nav
       className={cn(
@@ -31,17 +36,35 @@ export default function Header({ className }: HeaderProps) {
       <div className='collapse navbar-collapse' id='navbarNav'>
         <ul className='navbar-nav'>
           <li className='nav-item'>
-            <a className='nav-link active text-white' href='#'>
+            <a
+              className={cn(
+                { active: pathname === '/' },
+                'nav-link text-white'
+              )}
+              href='./'
+            >
               Home
             </a>
           </li>
           <li className='nav-item'>
-            <a className='nav-link text-white' href='#'>
+            <a
+              className={cn(
+                { active: pathname === '/courses' },
+                'nav-link text-white'
+              )}
+              href='#'
+            >
               Courses
             </a>
           </li>
           <li className='nav-item'>
-            <a className='nav-link text-white' href='/login'>
+            <a
+              className={cn(
+                { active: pathname === '/login' },
+                'nav-link text-white'
+              )}
+              href='/login'
+            >
               Login/Signup
             </a>
           </li>
