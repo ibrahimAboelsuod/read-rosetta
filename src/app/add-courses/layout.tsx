@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-export default function AuthLayout({
+export default function AddCoursesLayout({
   children,
 }: {
   children: React.ReactNode;

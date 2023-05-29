@@ -2,10 +2,11 @@ import { usePathname } from 'next/navigation';
 
 import cn from 'classnames';
 import { getAuth, signOut } from 'firebase/auth';
+import { collection, doc, getDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 
 import useFirebaseAuth from '@/firebase/firebase-auth.hook';
-import { firebaseApp } from '@/firebase/init-firebase';
+import { firebaseApp, firestoreDB } from '@/firebase/init-firebase';
 
 import styles from './header.module.css';
 
@@ -17,8 +18,17 @@ export default function Header({ className }: HeaderProps) {
   const pathname = usePathname();
   const { authUser } = useFirebaseAuth();
 
+  const userQuery = useQuery({
+    queryKey: ['userData', authUser?.uid],
+    queryFn: async () => {
+      return (
+        await getDoc(doc(collection(firestoreDB, 'USERS'), authUser?.uid))
+      ).data();
+    },
+  });
+
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ['signupData'],
+    queryKey: ['logoutData'],
     enabled: false,
     queryFn: async () => {
       await signOut(getAuth(firebaseApp));
@@ -96,20 +106,33 @@ export default function Header({ className }: HeaderProps) {
               </li>
             </>
           ) : (
-            <li className='nav-item'>
-              <a
-                className={cn('nav-link text-danger')}
-                href='#'
-                onClick={() => refetch()}
-                role='button'
-                aria-disabled={isLoading}
-              >
-                {isLoading && (
-                  <span className='spinner-border spinner-border-sm me-2'></span>
-                )}
-                Logout
-              </a>
-            </li>
+            <>
+              {userQuery.data && userQuery.data.role === 'admin' && (
+                <li className='nav-item'>
+                  <a
+                    className={cn('nav-link text-primary')}
+                    href='/add-courses'
+                    role='button'
+                  >
+                    Add Courses
+                  </a>
+                </li>
+              )}
+              <li className='nav-item'>
+                <a
+                  className={cn('nav-link text-danger')}
+                  href='#'
+                  onClick={() => refetch()}
+                  role='button'
+                  aria-disabled={isLoading}
+                >
+                  {isLoading && (
+                    <span className='spinner-border spinner-border-sm me-2'></span>
+                  )}
+                  Logout
+                </a>
+              </li>
+            </>
           )}
         </ul>
       </div>
