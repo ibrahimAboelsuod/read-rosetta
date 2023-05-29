@@ -16,7 +16,7 @@ import styles from './add-courses.module.css';
 
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
-  loading: () => <p>Loading ...</p>,
+  loading: () => <></>,
 });
 
 export default function AddCoursesPage() {

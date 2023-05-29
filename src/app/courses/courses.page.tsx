@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import cn from 'classnames';
+
 import { Course } from '@/models';
+
+import styles from './courses.module.css';
 
 export default function CoursesPage({ courses }: { courses: Course[] }) {
   return (
@@ -13,7 +17,10 @@ export default function CoursesPage({ courses }: { courses: Course[] }) {
         <div className='row'>
           {courses.map((course) => (
             <div className='col-md-6' key={course.id}>
-              <div className='card mb-3'>
+              <a
+                className={cn('card mb-3', styles['course-card'])}
+                href={`/course/${course.id}?title=${course.title}`}
+              >
                 <div className='row g-0'>
                   <div className='col-md-4'>
                     {course.coverImage && (
@@ -30,14 +37,10 @@ export default function CoursesPage({ courses }: { courses: Course[] }) {
                       <p className='card-text overflow-ellipsis'>
                         {course.description}
                       </p>
-                      {/* <p
-                        className='card-text'
-                        dangerouslySetInnerHTML={{ __html: course.content }}
-                      ></p> */}
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
