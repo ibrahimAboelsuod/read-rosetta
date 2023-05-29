@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import cn from 'classnames';
-
 import { Course } from '@/models';
 
 import styles from './courses.module.css';

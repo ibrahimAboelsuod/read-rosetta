@@ -8,20 +8,18 @@ import { Course } from '@/models';
 import CoursePage from './course.page';
 
 initFirebase();
+
+export const metadata: Metadata = {
+  title: 'Read Rosetta | Course',
+};
+
 interface CoursePageProps {
   params: { id: string };
   searchParams: {
     title: string;
   };
 }
-export async function generateMetadata(
-  { searchParams }: CoursePageProps,
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
-  return {
-    title: `Read Rosetta | ${searchParams.title}`,
-  };
-}
+
 export default async function CoursesPage({ params }: CoursePageProps) {
   let course: Course | undefined;
 
