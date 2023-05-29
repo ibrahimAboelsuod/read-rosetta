@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation';
 
 import cn from 'classnames';
-import { getAuth, signOut } from 'firebase/auth';
+import { User, getAuth, signOut } from 'firebase/auth';
 import { collection, doc, getDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 
@@ -16,7 +16,8 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps) {
   const pathname = usePathname();
-  const { authUser } = useFirebaseAuth();
+  let authUser = getAuth(firebaseApp).currentUser as User;
+  authUser = (useFirebaseAuth().authUser as User) || authUser;
 
   const userQuery = useQuery({
     queryKey: ['userData', authUser?.uid],
