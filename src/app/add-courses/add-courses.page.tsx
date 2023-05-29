@@ -3,16 +3,21 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { addDoc, collection } from 'firebase/firestore';
 
 import { firestoreDB } from '@/firebase/init-firebase';
 
 import styles from './add-courses.module.css';
+
+const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 
 export default function AddCoursesPage() {
   const router = useRouter();
@@ -128,7 +133,7 @@ export default function AddCoursesPage() {
                   </div>
                   <div className='mb-3'>
                     <label htmlFor='content'>Content</label>
-                    <ReactQuill
+                    <QuillNoSSRWrapper
                       value={content}
                       onChange={handleContentChange}
                     />
