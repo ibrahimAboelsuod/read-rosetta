@@ -2,14 +2,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { addDoc, collection } from 'firebase/firestore';
 
 import styles from './add-courses.module.css';
+import { firestoreDB } from '@/firebase/init-firebase';
 
 export default function AddCoursesPage() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -28,16 +34,15 @@ export default function AddCoursesPage() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setCoverImagePreview(reader.result);
+        setCoverImagePreview(window.btoa(reader.result as string));
       };
-      reader.readAsDataURL(file);
+      reader.readAsBinaryString(file);
     } else {
       setCoverImagePreview(null);
     }
   };
 
   const handleContentChange = (value: string) => {
-    console.log(value);
     setContent(value);
   };
 
@@ -45,18 +50,18 @@ export default function AddCoursesPage() {
     queryKey: ['addCourseData'],
     enabled: false,
     queryFn: async () => {
-      //   const userData = getValues();
-      //   try {
-      //     const auth = getAuth(firebaseApp);
-      //     await signInWithEmailAndPassword(
-      //       auth,
-      //       userData.email,
-      //       userData.password || ''
-      //     );
-      //     router.push('/');
-      //   } catch (error) {
-      //     alert(error);
-      //   }
+      const courseData = getValues();
+      try {
+        await addDoc(collection(firestoreDB, 'COURSES'), {
+          ...courseData,
+          coverImage: coverImagePreview,
+          content: content,
+          addedOn: new Date().getTime(),
+        });
+        router.push('/courses');
+      } catch (error) {
+        alert(error);
+      }
     },
   });
 
@@ -68,9 +73,7 @@ export default function AddCoursesPage() {
         <div className='col-lg-10'>
           <div className='card shadow-lg border-0 rounded-lg mt-5'>
             <div className='card-header'>
-              <h3 className='text-center font-weight-light my-4'>
-                Add Course
-              </h3>
+              <h3 className='text-center font-weight-light my-4'>Add Course</h3>
             </div>
             <div className='card-body row'>
               <div className='col-md-3'>
@@ -78,7 +81,10 @@ export default function AddCoursesPage() {
                   <div className={styles['cover-image-preview']}>
                     {coverImagePreview ? (
                       <img
-                        src={coverImagePreview as string}
+                        src={
+                          ('data:image/gif;base64,' +
+                            coverImagePreview) as string
+                        }
                         alt='Cover Image'
                         className={styles['img-fluid']}
                       />
@@ -111,7 +117,7 @@ export default function AddCoursesPage() {
                     <label htmlFor='title'>Title</label>
                   </div>
                   <div className='mb-3'>
-                  <label htmlFor='content'>Content</label>
+                    <label htmlFor='content'>Content</label>
                     <ReactQuill
                       value={content}
                       onChange={handleContentChange}
@@ -119,7 +125,11 @@ export default function AddCoursesPage() {
                     {errors.content && <span>This field is required</span>}
                   </div>
                   <div className='d-flex align-items-center justify-content-between mt-4 mb-0'>
-                    <button className='btn btn-primary' type='submit'>
+                    <button
+                      className='btn btn-primary'
+                      disabled={isLoading}
+                      type='submit'
+                    >
                       {isLoading && (
                         <span className='spinner-border spinner-border-sm me-2'></span>
                       )}
