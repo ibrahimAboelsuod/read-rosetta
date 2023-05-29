@@ -126,6 +126,17 @@ export default function Header({ className }: HeaderProps) {
                   )}
                   <li className='nav-item'>
                     <a
+                      className={cn(
+                        { active: pathname === '/courses' },
+                        'nav-link text-white'
+                      )}
+                      href='/courses'
+                    >
+                      Courses
+                    </a>
+                  </li>
+                  <li className='nav-item'>
+                    <a
                       className={cn('nav-link text-danger')}
                       href='#'
                       onClick={() => refetch()}

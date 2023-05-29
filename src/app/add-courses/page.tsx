@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: 'Read Rosetta | Add Courses',
 };
 
-export default function Login() {
+export default function AddCourses() {
   return <AddCoursesPage />;
 }
