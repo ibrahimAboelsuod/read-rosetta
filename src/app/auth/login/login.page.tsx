@@ -18,7 +18,7 @@ export default function LoginPage() {
   } = useForm();
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ['signupData'],
+    queryKey: ['loginData'],
     enabled: false,
     queryFn: async () => {
       const userData = getValues();
@@ -41,9 +41,6 @@ export default function LoginPage() {
 
   return (
     <>
-      <Head>
-        <title>Read Rosetta | Login</title>
-      </Head>
       <div className='row justify-content-center'>
         <div className='col-lg-6'>
           <div className='card shadow-lg border-0 rounded-lg mt-5'>
