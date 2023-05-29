@@ -10,8 +10,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { addDoc, collection } from 'firebase/firestore';
 
-import styles from './add-courses.module.css';
 import { firestoreDB } from '@/firebase/init-firebase';
+
+import styles from './add-courses.module.css';
 
 export default function AddCoursesPage() {
   const router = useRouter();
@@ -115,6 +116,15 @@ export default function AddCoursesPage() {
                     />
                     {errors.title && <span>This field is required</span>}
                     <label htmlFor='title'>Title</label>
+                  </div>
+                  <div className='form-floating mb-3'>
+                    <textarea
+                      className='form-control'
+                      {...register('description', { required: true })}
+                      placeholder='description'
+                    />
+                    {errors.description && <span>This field is required</span>}
+                    <label htmlFor='description'>Description</label>
                   </div>
                   <div className='mb-3'>
                     <label htmlFor='content'>Content</label>

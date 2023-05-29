@@ -123,3 +123,11 @@ a {
 .nav-link.active {
   font-weight: bold;
 }
+
+.overflow-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Adjust the number of lines before overflowing */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
