@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 initFirebase();
-
+export const revalidate = 0;
 export default async function CoursesPage() {
   let courses: Course[] = [];
 

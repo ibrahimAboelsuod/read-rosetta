@@ -9,7 +9,7 @@
     "lint": "next lint",
     "predeploy:firebase": "npm run build",
     "deploy:firebase": "npx firebase deploy --only hosting",
-    "deploy:vercel": "npx vercel --prod"
+    "deploy:vercel": "npx vercel --prod --force"
   },
   "dependencies": {
     "@types/node": "20.1.4",
