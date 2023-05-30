@@ -1,6 +1,5 @@
 'use client';
 
-import Header from '@/components/header/header';
 import { initFirebase } from '@/firebase/init-firebase';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -11,7 +10,6 @@ export default function SubLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header className='header' />
       {children}
     </QueryClientProvider>
   );

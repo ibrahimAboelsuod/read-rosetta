@@ -4,13 +4,14 @@ import cn from 'classnames';
 import HeroSection from '@/components/hero-section/hero-section';
 
 import styles from './page.module.css';
+import Header from '@/components/header/header';
 
 export default function Home() {
   return (
-    <>
+    <main className={cn('home-main')}>
       <HeroSection className={styles['hero-section']} />
 
-      <section className={cn('container bg-white p-4', 'content-container')}>
+      <section className={cn('container bg-white p-4', styles['content-container'])}>
         <h2 className='text-dark text-center'>The Rosetta Stone</h2>
         <div className='row'>
           <div className='col-md-4'>
@@ -69,6 +70,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

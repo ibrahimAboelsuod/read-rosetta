@@ -108,10 +108,21 @@ a {
 
 .main {
   height: 100vh;
+  display: grid;
+  grid-template-areas: 'header' 'content-container';
+  grid-template-rows: 60px calc(100vh - 60px);
+}
+
+.home-main {
   overflow-y: auto;
   display: grid;
-  grid-template-areas: 'header' 'hero-section' 'content-container';
-  grid-template-rows: 60px 75vh auto;
+  grid-template-areas: 'hero-section' 'content-container';
+  grid-template-rows: 75vh auto;
+}
+
+.content-container {
+  grid-area: content-container;
+  overflow-y: auto;
 }
 
 .header {
