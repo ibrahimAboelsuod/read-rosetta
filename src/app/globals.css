@@ -126,7 +126,7 @@ a {
 
 .overflow-ellipsis {
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* Adjust the number of lines before overflowing */
+  -webkit-line-clamp: 4; /* Adjust the number of lines before overflowing */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

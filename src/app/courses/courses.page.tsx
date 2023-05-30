@@ -21,18 +21,18 @@ export default function CoursesPage({ courses }: { courses: Course[] }) {
                 className={cn('card mb-3', styles['course-card'])}
                 href={`/course/${course.id}?title=${course.title}`}
               >
-                <div className='row g-0'>
-                  <div className='col-md-4'>
+                <div className='row h-100'>
+                  <div className={cn('col-md-4 h-100 p-0', styles['course-card__cover-wrapper'])}>
                     {course.coverImage && (
                       <img
                         src={'data:image/gif;base64,' + course.coverImage}
                         alt='Course Cover'
-                        className='img-fluid rounded-start'
+                        className={styles['course-card__cover']}
                       />
                     )}
                   </div>
-                  <div className='col-md-8'>
-                    <div className='card-body'>
+                  <div className='col-md-8 h-100'>
+                    <div className='card-body h-100'>
                       <h3 className='card-title'>{course.title}</h3>
                       <p className='card-text overflow-ellipsis'>
                         {course.description}

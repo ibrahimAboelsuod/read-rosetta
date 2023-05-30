@@ -12,7 +12,7 @@ export default function CoursePage({ course }: { course: Course }) {
         <img
           src={'data:image/gif;base64,' + course.coverImage}
           alt='Course Cover'
-          className='img-fluid rounded-start'
+          className='img-fluid rounded'
         />
       </div>
       <div className='col-md-8'>
