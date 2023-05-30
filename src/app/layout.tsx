@@ -1,15 +1,12 @@
-'use client';
 import { Inter } from 'next/font/google';
 
 import cn from 'classnames';
 import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { initFirebase } from '../firebase/init-firebase';
-import Header from '@/components/header/header';
 
 import './globals.css';
+import SubLayout from './sub-layout';
 
 const inter = Inter({ subsets: ['latin'] });
 initFirebase();
@@ -24,8 +21,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient();
-
   return (
     <html lang='en'>
       <head>
@@ -33,10 +28,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <main className={cn('bg-light', 'main')}>
-          <QueryClientProvider client={queryClient}>
-            <Header className='header' />
-            {children}
-          </QueryClientProvider>
+          <SubLayout>{children}</SubLayout>
         </main>
       </body>
     </html>
