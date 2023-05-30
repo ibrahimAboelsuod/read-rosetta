@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "npx firebase deploy --only hosting"
+    "predeploy:firebase": "npm run build",
+    "deploy:firebase": "npx firebase deploy --only hosting",
+    "deploy:vercel": "npx vercel --prod"
   },
   "dependencies": {
     "@types/node": "20.1.4",
